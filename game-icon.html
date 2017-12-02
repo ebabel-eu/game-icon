@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
 
 <dom-module id="game-icon">
   <template>
@@ -6,8 +7,56 @@
       :host {
         display: block;
       }
+
+      h1 {
+        font-size: 1.25em;
+        margin: .5em 0;
+        line-height: 1.5em;
+        font-weight: normal;
+      }
+
+      p {
+        margin: .5em 0 1.5em;
+      }
+
+      .copyright {
+        display: none;
+        font-style: italic;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <template is="dom-if" if="[[debug]]">
+      <h1>[[path]]</h1>
+
+      <style>
+        .copyright {
+          display: block;
+        }
+      </style>
+    </template>
+
+    <object data="[[data]]" width="[[width]]" height="[[height]]" type="image/svg+xml">
+      <img src="[[data]]" width="[[width]]" height="[[height]]">
+    </object>
+
+    <template is="dom-if" if="[[author]]">
+      <!-- copyright notice -->
+      <p class="copyright">
+        Icon made by
+        <template is="dom-if" if="[[!website]]">
+          [[author]]
+        </template>
+        <template is="dom-if" if="[[website]]">
+          <a href="[[website]]">
+            [[author]]
+          </a>
+        </template>
+      </p>
+    </template>
+
+    <template is="dom-if" if="[[!author]]">
+      <p class="copyright">Unkown author</p>
+    </template>
   </template>
 
   <script>
@@ -23,11 +72,46 @@
       static get is() { return 'game-icon'; }
       static get properties() {
         return {
-          prop1: {
+          debug: {
+            type: Boolean,
+            value: false,
+          },
+          author: {
             type: String,
-            value: 'game-icon'
-          }
+          },
+          website: {
+            type: String,
+          },
+          path: {
+            type: String,
+          },
+          width: {
+            type: Number,
+            value: 50,
+          },
+          height: {
+            type: Number,
+            value: 50,
+          },
         };
+      }
+
+      ready() {
+        super.ready();
+
+        if (this.author && this.path) {
+          this.data = `../icons/${this.author}/originals/svg/${this.path}.svg`;
+        } else {
+          this.data = this.path;
+        }
+
+        switch (this.author) {
+          case 'heavenly-dog':
+            this.website = 'http://www.gnomosygoblins.blogspot.com';
+            break;
+          default:
+            this.website = null;
+        }
       }
     }
 
