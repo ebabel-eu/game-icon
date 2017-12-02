@@ -44,11 +44,11 @@
       <p class="copyright">
         Icon made by
         <template is="dom-if" if="[[!website]]">
-          [[author]]
+          [[authorDisplayName]]
         </template>
         <template is="dom-if" if="[[website]]">
           <a href="[[website]]">
-            [[author]]
+            [[authorDisplayName]]
           </a>
         </template>
       </p>
@@ -79,9 +79,6 @@
           author: {
             type: String,
           },
-          website: {
-            type: String,
-          },
           path: {
             type: String,
           },
@@ -108,10 +105,17 @@
         switch (this.author) {
           case 'heavenly-dog':
             this.website = 'http://www.gnomosygoblins.blogspot.com';
+            this.authorFullName = 'HeavenlyDog';
+            break;
+          case 'andymeneely':
+            this.website = 'http://www.se.rit.edu/~andy/';
+            this.authorFullName = 'Andy Meneely';
             break;
           default:
             this.website = null;
         }
+
+        this.authorDisplayName = this.authorFullName || this.author;
       }
     }
 
