@@ -96,8 +96,12 @@
       ready() {
         super.ready();
 
+        const base = window.location.href.indexOf('/components/game-icon/demo') ?
+          '../'
+          : `${window.location.href}bower_components/game-icon/`;
+
         if (this.author && this.path) {
-          this.data = `../icons/${this.author}/originals/svg/${this.path}.svg`;
+          this.data = `${base}icons/${this.author}/originals/svg/${this.path}.svg`;
         } else {
           this.data = this.path;
         }
