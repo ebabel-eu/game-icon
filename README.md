@@ -1,21 +1,28 @@
 # \<game-icon\>
-
 Render an icon for HTML5 games UI with Polymer.js
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
+## Install
 ```
-$ polymer serve
+bower install --save ebabel-eu/game-icon
 ```
 
-## Running Tests
+## Usage
+The path relative to your bower_components director may vary when importing.
 
 ```
-$ polymer test
+<link rel="import" href="../../bower_components/game-icon/game-icon.html">
+
+<game-icon author="heavenly-dog" path="defensive-wall"></game-icon>
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+If you want to see more information about the icon, such as copyright, include a debug parameter.
+
+```
+<game-icon debug author="heavenly-dog" path="defensive-wall"></game-icon>
+```
+
+The width and height may be modified.
+
+```
+<game-icon width="100" height="100" author="heavenly-dog" path="defensive-wall"></game-icon>
+```
